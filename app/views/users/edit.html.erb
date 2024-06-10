@@ -1,0 +1,60 @@
+<style>
+  .edit-profile-form {
+    width: 33.33%; /* 幅を1/3にする */
+    margin: auto; /* 中央揃え */
+  }
+  .edit-profile-form label {
+    font-weight: bold; /* フォームラベルを太字にする */
+  }
+  .edit-profile-form input[type="text"],
+  .edit-profile-form textarea,
+  .edit-profile-form input[type="file"] {
+    width: 100%; /* 入力ボックスの幅を100%にする */
+    margin-bottom: 10px; /* 下部のマージンを追加 */
+  }
+  .edit-profile-form .btn-primary {
+    background-color: #808080; /* グレーに設定 */
+    color: white; /* 文字色を白に設定 */
+    border: none; /* 枠線なし */
+
+    border-radius: 5px; /* 角丸にする */
+    padding: 8px 13px; /* ボタンの内側の余白 */
+    font-size: 16px; /* 文字サイズ */
+    cursor: pointer; /* カーソルをポインターに変更 */
+    /* その他のスタイルも必要に応じて指定 */
+  }
+</style>
+
+<% if @user.errors.any? %>
+  <%= @user.errors.count %>error prohibited this obj from being saved:
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+
+<div class="container">
+  <div class="edit-profile-form">
+    <h2>User info</h2>
+    <%= form_with model: @user, local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, autofocus: true, placeholder: "name", class: "form-control" %>
+      </div>
+      <div>
+        <label for="inputImage">Image</label>
+          <%= f.file_field :profile_image, placeholder: "profile_image", accept: "image/*" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :introduction %>
+        <%= f.text_area :introduction, placeholder: "introduction", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit "Update User", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

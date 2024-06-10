@@ -1,0 +1,19 @@
+<div style="width: 30%;">
+  <h1>User info</h1>
+  <%= image_tag user.get_profile_image(100,100) %>
+  <p>name: <%= user.name %></p>
+  <p>introduction: <%= user.introduction %></p>
+  <%= link_to edit_user_path(user), class: 'btn btn-primary btn-block' do %>
+    <i class="fas fa-user-cog"></i>
+  <% end %>
+
+  <!--% if user == current_user %>-->
+  <!--  %= link_to edit_user_path(user), class: 'btn btn-primary btn-block' do %>-->
+  <!--    <i class="fas fa-user-cog"></i>-->
+  <!--  % end %>-->
+  <!--% else %>-->
+  <!--  %= link_to user_path(current_user), class: 'btn btn-primary btn-block' do %>-->
+  <!--    <i class="fas fa-user-cog"></i>-->
+  <!--  % end %>-->
+  <!--% end %>-->
+</div>

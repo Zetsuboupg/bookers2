@@ -1,0 +1,27 @@
+<div>
+  <h1>Books</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Opinion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @books.each do |book| %>
+        <tr>
+          <td>
+            <% if book.user.present? %>
+              <%= link_to user_path(book.user) do %>
+                <%= image_tag book.user.get_profile_image(50, 50) if book.user.respond_to?(:get_profile_image) %>
+              <% end %>
+            <% end %>
+          </td>
+          <td><%= link_to book.title, book_path(book) %></td>
+          <td><%= book.body %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

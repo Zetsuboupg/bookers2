@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <!-- 左側のコンテンツ -->
+    <div class="col-md-3">
+      <%= render 'users/list', user: @user %>
+
+      <!-- ユーザーの詳細 -->
+      <%= render 'books/llst', book: @book %>
+    </div>
+
+    <!-- 右側のコンテンツ -->
+    <div class="col-md-8 offset-md-1">
+      <div>
+        <h1>Users</h1>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>image</th>
+              <th>name</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <% displayed_users = Set.new %> <!-- 重複を排除するためのセットを用意 -->
+            <% @books.each do |book| %>
+              <% user = book.user %>
+              <% next if user.nil? || displayed_users.include?(user.id) %> <!-- ユーザーが存在しないか、すでに表示されている場合はスキップ -->
+              <tr>
+                <td><%= image_tag user.get_profile_image(50, 50) if user.respond_to?(:get_profile_image) %></td>
+                <td><%= user.name %></td>
+                <td><%= link_to "Show", user_path(user) %></td>
+              </tr>
+              <% displayed_users << user.id %> <!-- 表示されたユーザーをセットに追加 -->
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

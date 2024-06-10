@@ -1,0 +1,20 @@
+<div class="container text-center">
+  <h1>Welcome to <i class="fas fa-book"></i>Bookers !!</h1>
+  <p>In <i class="fas fa-book"></i> Bookers,</p>
+  <p>you can share and exchange your opinions, impressions, and emotions</p>
+  <p>about various books!</p>
+
+
+  <div class="mt-4">
+    <div class="d-flex flex-column align-items-center">
+      <div class="col-6 mb-3">
+        <%= link_to "Log in", new_user_session_path, class: "btn btn-primary w-100" %>
+      </div>
+
+      <div class="col-6">
+        <%= link_to "Sign up", new_user_registration_path, class: "btn btn-success w-100" %>
+      </div>
+
+    </div>
+  </div>
+</div>

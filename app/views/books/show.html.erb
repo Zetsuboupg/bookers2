@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <!-- 左側のコンテンツ -->
+    <div class="col-md-3">
+      <%= render 'users/list', user: @user %>
+
+      <!-- ユーザーの詳細 -->
+      <%= render 'books/llst', book: Book.new %>
+    </div>
+
+    <!-- 右側のコンテンツ -->
+<div class="col-md-8 offset-md-1">
+  <div>
+    <h1>Book detail</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Opinion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <% if @book.user.present? %>
+              <%= image_tag @book.user.get_profile_image(50, 50) if @book.user.respond_to?(:get_profile_image) %>
+              <%= link_to @book.user.name, user_path(@book.user) %>
+            <% end %>
+          </td>
+          <td><%= link_to @book.title, book_path(@book) %></td>
+          <td><%= @book.body %></td>
+
+          <td>
+            <% if current_user == @book.user %>
+              <%= link_to "Edit", edit_book_path(@book), class: "btn btn-success" %>
+            <% end %>
+          </td>
+          <td>
+            <% if current_user == @book.user %>
+              <%= link_to "Destroy", book_path(@book), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure you want to delete this book?" } %>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
